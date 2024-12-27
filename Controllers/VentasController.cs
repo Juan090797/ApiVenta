@@ -62,11 +62,24 @@ namespace ApiVenta.Controllers
 
             foreach(var detalle in venta.Detalles)
             {
+                //if(detalle.Cantidad <= 0)
+                //{
+                //    return BadRequest("La cantidad de productos debe ser mayor a 0");
+                //}
+
                 var producto = await _context.Producto.FirstOrDefaultAsync(p => p.Id == detalle.ProductoId);
                 if (producto == null)
                 {
                     return BadRequest();
                 }
+
+                if(producto.Cantidad < detalle.Cantidad) 
+                {
+                    return BadRequest("No hay suficiente stock para el producto " + producto.Nombre);
+                }
+
+                producto.Cantidad -= detalle.Cantidad;
+
                 var ventaDetalle = new VentaDetalle
                 {
                     ProductoId = producto.Id,
