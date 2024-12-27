@@ -1,0 +1,13 @@
+﻿using ApiVenta.Models;
+using Microsoft.EntityFrameworkCore;
+
+namespace ApiVenta.Data
+{
+    public class ApplicationDbContext : DbContext
+    {
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
+
+        //relacionando la tabla con la entidad 
+        public DbSet<Producto> Producto { get; set; }
+    }
+}
