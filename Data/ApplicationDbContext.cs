@@ -9,5 +9,7 @@ namespace ApiVenta.Data
 
         //relacionando la tabla con la entidad 
         public DbSet<Producto> Producto { get; set; }
+        public DbSet<Venta> Venta { get; set; }
+        public DbSet<VentaDetalle> VentaDetalle { get; set; }
     }
 }
